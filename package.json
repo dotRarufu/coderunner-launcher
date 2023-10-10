@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
-    "generate-types": "npx pocketbase-typegen --url https://coderunner.pockethost.io --email admin@myproject.com --password 'secr3tp@ssword!' --out pocketbase-types.ts"
+    "generate-types": "npx pocketbase-typegen --url https://coderunner.pockethost.io --email typegenaccount@gmail.com --password jOlGvpDG1ZItdEXfFhKRegPtafgma9DP --out pocketbase-types.ts"
   },
   "keywords": [],
   "author": {
@@ -45,6 +45,8 @@
     "pocketbase": "^0.18.2",
     "pocketbase-typegen": "^1.1.13",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-router-dom": "^6.16.0"
   }
 }

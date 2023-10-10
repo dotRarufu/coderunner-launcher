@@ -1,8 +1,21 @@
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import App from './components/App';
+import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+
+const { api } = window;
+
+// api.startGame();
 
 function render() {
-  ReactDOM.render(<App />, document.body);
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
 }
 
 render();

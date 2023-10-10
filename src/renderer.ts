@@ -1,16 +1,5 @@
 import './index.css';
-import { client } from '../src/lib/pocketbase';
-
-const { api } = window;
-
-const startBtn = document.querySelector<HTMLButtonElement>('#start-button');
-
-startBtn.addEventListener('click', e => {
-  e.preventDefault();
-  console.log('start game click');
-
-  api.startGame();
-});
+import { pb } from '../src/lib/pocketbase';
 
 function updateDocumentSize() {
   const documentWidth = window.innerWidth;
@@ -29,7 +18,7 @@ window.addEventListener('resize', updateDocumentSize);
 // Call the function initially to set the initial document size
 updateDocumentSize();
 
-client.collection('');
+pb.collection('');
 
 // Add this to the end of the existing file
 import './app';
