@@ -3,6 +3,7 @@
 */
 
 export enum Collections {
+	Save = "save",
 	Users = "users",
 }
 
@@ -30,20 +31,28 @@ export type AuthSystemFields<T = never> = {
 
 // Record types for each collection
 
+export type SaveRecord = {
+	files?: string[]
+	owner?: RecordIdString
+}
+
 export type UsersRecord = {
 	avatar?: string
 	name?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API
+export type SaveResponse<Texpand = unknown> = Required<SaveRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
 // Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
+	save: SaveRecord
 	users: UsersRecord
 }
 
 export type CollectionResponses = {
+	save: SaveResponse
 	users: UsersResponse
 }

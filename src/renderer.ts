@@ -1,5 +1,4 @@
 import './index.css';
-import { pb } from '../src/lib/pocketbase';
 
 function updateDocumentSize() {
   const documentWidth = window.innerWidth;
@@ -17,8 +16,6 @@ window.addEventListener('resize', updateDocumentSize);
 
 // Call the function initially to set the initial document size
 updateDocumentSize();
-
-pb.collection('');
 
 // Add this to the end of the existing file
 import './app';

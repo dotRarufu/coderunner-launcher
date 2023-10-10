@@ -3,13 +3,22 @@
 
 import { contextBridge, ipcRenderer, shell } from 'electron';
 
-const startGame = () => {
-  console.log('1');
-  ipcRenderer.send('start-game');
+const startGame = (userId: string) => {
+  ipcRenderer.send('start-game', userId);
+};
+
+const loadGame = (userId: string) => {
+  ipcRenderer.send('load-game', userId);
+};
+
+const deleteSave = () => {
+  ipcRenderer.send('delete-save');
 };
 
 export const api = {
+  loadGame,
   startGame,
+  deleteSave,
   shell: (path: string, options?: Electron.OpenExternalOptions) =>
     shell.openExternal(path, options),
 };

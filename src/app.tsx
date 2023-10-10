@@ -4,10 +4,6 @@ import App from './components/App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 
-const { api } = window;
-
-// api.startGame();
-
 function render() {
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>

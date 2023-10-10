@@ -1,15 +1,22 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import path from 'path';
 import process from 'process';
+import { spawn } from 'child_process';
+
+import { saveData } from './utils/saveData';
+import { deleteSaveData } from './utils/deleteSaveData';
+import { loadData } from './utils/loadData';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+let mainWindow: BrowserWindow = null;
+
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     frame: false,
     transparent: true,
     width: 800,
@@ -54,18 +61,36 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
-
 app.whenReady().then(() => {
-  // path: string, options?: Electron.OpenExternalOptions
-
-  ipcMain.on('start-game', () => {
-    console.log('run start game');
-
+  ipcMain.on('start-game', (_, userId: string) => {
     const gamePath = path.join(process.cwd(), 'game', 'Game.exe');
-    console.log('gamePath:', gamePath);
-    shell.openExternal(gamePath);
-    app.quit();
+
+    const gameProcess = spawn(gamePath);
+
+    gameProcess.on('close', () => {
+      try {
+        saveData(userId);
+      } catch (err) {
+        console.log('Could not save data:', err);
+      }
+
+      mainWindow.show();
+    });
+
+    mainWindow.hide();
+    // shell.openExternal(gamePath);
+    // app.quit();
   });
+
+  ipcMain.on('load-game', (_, userId: string) => {
+    loadData(userId);
+  });
+
+  ipcMain.on('delete-save', () => {
+    deleteSaveData();
+  });
+});
+
+app.on('before-quit', () => {
+  deleteSaveData();
 });
