@@ -9,6 +9,7 @@ const Home = () => {
 
   const handleLogoutClick = () => {
     pb.authStore.clear();
+    api.deleteSave();
   };
 
   const handleStartClick = () => {
