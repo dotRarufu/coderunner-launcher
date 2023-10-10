@@ -1,6 +1,5 @@
 import './index.css';
 import { client } from '../src/lib/pocketbase';
-import * as ReactDOM from 'react-dom';
 
 const { api } = window;
 

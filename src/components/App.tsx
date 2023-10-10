@@ -1,5 +1,10 @@
 const App = () => {
-  return <h2 className="">asdasdHello from React!</h2>;
+  return (
+    <>
+      <button className="btn btn-primary">test button</button>
+      <h2 className="bg-red-500 text-green-500">asdasdHello from React!</h2>;
+    </>
+  );
 };
 
 export default App;
