@@ -3,8 +3,17 @@ import fs from 'fs';
 import { Collections } from '../../pocketbase-types';
 import { pb } from '../lib/pocketbase';
 
-export const saveData = async (userId: string) => {
-  const saveFolder = path.join(process.cwd(), 'game', 'save');
+export const saveData = async (userId: string, inBuild?: boolean) => {
+  const buildSaveFolder = path.join(
+    process.cwd(),
+    'resources',
+    'app',
+    'game',
+    'save'
+  );
+  const saveFolder = inBuild
+    ? buildSaveFolder
+    : path.join(process.cwd(), 'game', 'save');
 
   const saveFiles = fs.readdirSync(saveFolder);
 
@@ -25,5 +34,5 @@ export const saveData = async (userId: string) => {
     })
   );
 
-  const createdRecord = await pb.collection(Collections.Save).create(formData);
+  await pb.collection(Collections.Save).create(formData);
 };

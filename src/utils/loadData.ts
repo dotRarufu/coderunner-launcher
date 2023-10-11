@@ -3,9 +3,18 @@ import { pb } from '../lib/pocketbase';
 import { getUserSave } from '../services/save';
 import { downloadFile } from './downloadFile';
 
-export const loadData = async (userId: string) => {
+export const loadData = async (userId: string, inBuild?: boolean) => {
   try {
-    const saveFolder = path.join(process.cwd(), 'game', 'save');
+    const buildSaveFolder = path.join(
+      process.cwd(),
+      'resources',
+      'app',
+      'game',
+      'save'
+    );
+    const saveFolder = inBuild
+      ? buildSaveFolder
+      : path.join(process.cwd(), 'game', 'save');
     const record = await getUserSave(userId);
     record.files.forEach(file => {
       const url = pb.files.getUrl(record, file);

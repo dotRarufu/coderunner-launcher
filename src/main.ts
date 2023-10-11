@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import process from 'process';
 import { spawn } from 'child_process';
@@ -62,14 +62,23 @@ app.on('activate', () => {
 });
 
 app.whenReady().then(() => {
-  ipcMain.on('start-game', (_, userId: string) => {
-    const gamePath = path.join(process.cwd(), 'game', 'Game.exe');
+  const inBuild = !MAIN_WINDOW_VITE_DEV_SERVER_URL;
 
-    const gameProcess = spawn(gamePath);
+  ipcMain.on('start-game', (_, userId: string) => {
+    const devGamePath = path.join(process.cwd(), 'game', 'Game.exe');
+    const buildGamePath = path.join(
+      process.cwd(),
+      'resources',
+      'app',
+      'game',
+      'Game.exe'
+    );
+
+    const gameProcess = spawn(inBuild ? buildGamePath : devGamePath);
 
     gameProcess.on('close', () => {
       try {
-        saveData(userId);
+        saveData(userId, inBuild);
       } catch (err) {
         console.log('Could not save data:', err);
       }
@@ -83,11 +92,11 @@ app.whenReady().then(() => {
   });
 
   ipcMain.on('load-game', (_, userId: string) => {
-    loadData(userId);
+    loadData(userId, inBuild);
   });
 
   ipcMain.on('delete-save', () => {
-    deleteSaveData();
+    deleteSaveData(inBuild);
   });
 });
 
