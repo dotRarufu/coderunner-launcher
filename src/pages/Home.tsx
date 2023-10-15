@@ -21,13 +21,20 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      You arei nhome
-      <button className="btn btn-primary" onClick={handleLogoutClick}>
+    <div className="flex flex-col justify-between h-full ">
+      <div className="flex flex-col gap-4">
+        <span>
+          Welcome, <span className="font-bold">{user.name}</span>
+        </span>
+        <button className="btn btn-primary" onClick={handleStartClick}>
+          Start Game
+        </button>
+      </div>
+      <button
+        className="btn btn-ghost hover:btn-error"
+        onClick={handleLogoutClick}
+      >
         Logout
-      </button>
-      <button className="btn btn-primary" onClick={handleStartClick}>
-        Start Game
       </button>
     </div>
   );

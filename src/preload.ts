@@ -15,10 +15,20 @@ const deleteSave = () => {
   ipcRenderer.send('delete-save');
 };
 
+const closeApp = () => {
+  ipcRenderer.send('close-app');
+};
+
+const getAssetPath = (path: string[]) => {
+  return ipcRenderer.sendSync('get-asset-path', path);
+};
+
 export const api = {
   loadGame,
   startGame,
   deleteSave,
+  closeApp,
+  getAssetPath,
   shell: (path: string, options?: Electron.OpenExternalOptions) =>
     shell.openExternal(path, options),
 };

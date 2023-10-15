@@ -12,12 +12,12 @@ export const loginUser = async (username: string, password: string) => {
 };
 
 export const signUpUser = async (
-  email: string,
+  name: string,
   username: string,
   password: string
 ) => {
   const data = {
-    name: email,
+    name,
     username,
     password,
     passwordConfirm: password,

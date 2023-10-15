@@ -19,8 +19,10 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     frame: false,
     transparent: true,
-    width: 800,
+    width: 400,
     height: 600,
+    resizable: false,
+    icon: 'src/assets/icon.png',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -97,6 +99,25 @@ app.whenReady().then(() => {
 
   ipcMain.on('delete-save', () => {
     deleteSaveData(inBuild);
+  });
+
+  ipcMain.on('close-app', () => {
+    app.quit();
+  });
+
+  ipcMain.on('get-asset-path', (event, arg) => {
+    const inputPath = arg as string[];
+    const inBuild = !MAIN_WINDOW_VITE_DEV_SERVER_URL;
+    const devGamePath = ['src', ...inputPath].join('/');
+    const buildGamePath = path.join(
+      process.cwd(),
+      'resources',
+      'app',
+      'src',
+      ...inputPath
+    );
+
+    event.returnValue = inBuild ? buildGamePath : devGamePath;
   });
 });
 
