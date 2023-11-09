@@ -2,14 +2,15 @@
 
 <p id="description">a desktop launcher for coderunner</p>
 
-<h2>🧐 Features</h2>
+<h2>📷 Screenhots</h2>
+<img src="docs/login.png" width="400" height="600/">
+<img src="docs/signup.png" width="400" height="600/">
+<img src="docs/start.png" width="400" height="600/">
 
-Here're some of the project's best features:
+<h2>🧐 Features</h2>
 
 - Authentication
 - Save File Synchronization
-
-<h2>🛠️ Installation Steps:</h2>
 
 <h2>💻 Built with</h2>
 
