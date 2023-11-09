@@ -1,11 +1,9 @@
 #!/usr/bin/bash
-# wip, does not work
-address=$(grep POCKETHOST_ADDRESS .env | cut -d '=' -f2)
-email=$(grep ADMIN_EMAIL .env | cut -d '=' -f2)
-password=$(grep ADMIN_PASSWORD .env | cut -d '=' -f2)
+source .env
 
-echo "address: $address"
-echo "email: $email"
-echo "password: $password"
+echo "runs"
+echo $POCKETHOST_ADDRESS
+echo $ADMIN_EMAIL
+echo $ADMIN_PASSWORD
 
-npx pocketbase-typegen --url $address --email email --password $password --out pocketbase-types.ts
+npx pocketbase-typegen --url $POCKETHOST_ADDRESS --email $ADMIN_EMAIL --password $ADMIN_PASSWORD --out src/types/pocketbase-types.ts

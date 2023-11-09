@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
-    "generate-types": "npx pocketbase-typegen --url https://coderunner.pockethost.io --email typegenaccount@gmail.com --password jOlGvpDG1ZItdEXfFhKRegPtafgma9DP --out pocketbase-types.ts"
+    "generate-types": "generate-types.sh"
   },
   "keywords": [],
   "author": {
