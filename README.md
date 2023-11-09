@@ -20,3 +20,23 @@ Technologies used in the project:
 - Tailwind
 - DaisyUI
 - Electron
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. Install packages</p>
+
+```
+npm install
+```
+
+<p>2. Run in dev mode</p>
+
+```
+npm run start
+```
+
+<p>3. Build</p>
+
+```
+npm run make
+```
